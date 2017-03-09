@@ -3,17 +3,11 @@ var async = require('async');
 var AWS = require('aws-sdk');
 var convertAmazonJSON = require('./lib/convert.js');
 
-// AWS library
-//AWS.config.loadFromPath('./config.json');
-var dynamoDB = null;
-
 // export a table to JSON
 var tableExport = function(region, table, callback) {
 
-  // default to local DynamoDB
-  var config = {};
-
   // if we don't have environment variables
+  var config = {};
   if (!process.env.AWS_ACCESS_KEY_ID && ! process.env.AWS_SECRET_ACCESS_KEY) {
 
     // assume local DynamoDB
@@ -36,13 +30,20 @@ var tableExport = function(region, table, callback) {
     };
     var start = new Date().getTime();
 
+    // keep going until we're finished
     async.doUntil(function(cb) {
+
+      // do table scan
       dynamoDB.scan(query, function(err, data) {
         if (err) {
           return callback(err, null);
         }
+
+        // extract the data bit
         var items = data.Items;
         lastReply = data;
+
+        // keep tally of how many DynamoDB requests we make
         iterations++;
 
         // loop through each item and output as JSON
@@ -59,12 +60,16 @@ var tableExport = function(region, table, callback) {
         cb(null, null)
       });
     }, function() {
+      // check to see if we've more work to do
       if (lastReply.LastEvaluatedKey) { // Result is incomplete; there is more to come.
         query.ExclusiveStartKey = lastReply.LastEvaluatedKey;
         return false;
       }
+      // if we're done, return true
       return true;
     }, function(e, r) {
+
+      // calculate execution time and return summary object
       var end = new Date().getTime();
       callback(e, { iterations: iterations, records: records, time: (end - start)/1000 });
     });

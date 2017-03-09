@@ -26,7 +26,7 @@ or in a [shared credentials file](http://docs.aws.amazon.com/sdk-for-javascript/
 
 The AWS *Region* is set with the `-r` or `--region` command-line parameter.
 
-## Usage
+## Command-line Usage
 
 Use the *dynamodbexport* tool to export an entire DynamoDB table. The table is specified with the `-t` or `--table` command-line parameter:
 
@@ -52,6 +52,23 @@ $ dynamodbexport --table mytable | couchimport --db mycouchtable --type jsonl
 Export complete { iterations: 1, records: 3, time: 0.145 }
 couchimport writecomplete { total: 3, totalfailed: 0 } +20ms
 couchimport Import complete
+```
+
+## Programmatic Usage
+
+You can also use the library within your own code:
+
+```js
+var dynamodbexport = require('dynamodbexport');
+var region = 'us-east-1';
+var table = 'mytable';
+dynamodbexport.tableExport(region, table, function(err, data) {
+  if (err) {
+    console.error('ERROR', err)
+  } else {
+    console.error('Export complete', data)
+  }
+});
 ```
 
 ## Options Reference
