@@ -1,0 +1,33 @@
+{
+  "name": "dynamodbexport",
+  "version": "1.0.0",
+  "description": "DynamoDB to CSV export tool",
+  "main": "index.js",
+  "bin": {
+    "dynamodbexport": "bin/dynamodbexport.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glynnbird/dynamodbexport.git"
+  },
+  "keywords": [
+    "DynamoDB",
+    "csv",
+    "export",
+    "command-line"
+  ],
+  "author": "Glynn Bird <glynn.bird@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/glynnbird/dynamodbexport/issues"
+  },
+  "homepage": "https://github.com/glynnbird/dynamodbexport#readme",
+  "dependencies": {
+    "async": "^2.1.5",
+    "aws-sdk": "^2.24.0",
+    "commander": "^2.9.0"
+  }
+}
