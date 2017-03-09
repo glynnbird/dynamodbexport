@@ -9,12 +9,19 @@ var tableExport = function(region, table, callback) {
   // if we don't have environment variables
   var config = {};
   if (!process.env.AWS_ACCESS_KEY_ID && ! process.env.AWS_SECRET_ACCESS_KEY) {
-
+    
     // assume local DynamoDB
-    config = { endpoint: new AWS.Endpoint('http://localhost:8000'), region: 'local' };
+    console.error('dynamodbexport - using local DynamoDB (localhost:8000)');
+    config = { 
+      endpoint: new AWS.Endpoint('http://localhost:8000'), 
+      region: 'local', 
+      accessKeyId: 'local', 
+      secretAccessKey: 'local' 
+    };
   } else {
     
     // otherwise use the passed-in region
+    console.error('dynamodbexport - using remote DynamoDB');
     config = { region: region };
   }
   var dynamoDB = new AWS.DynamoDB(config);

@@ -22,9 +22,7 @@ export AWS_ACCESS_KEY_ID="OGIIWJGNWNIITJHWTHSO"
 export AWS_SECRET_ACCESS_KEY="YRPHIIIWJJJYwKLGV28JJuiuwnjiiqq06ASn"
 ```
 
-or in a [shared credentials file](http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html).
-
-The AWS *Region* is set with the `-r` or `--region` command-line parameter.
+The AWS *Region* must also be set with the `-r` or `--region` command-line parameter.
 
 ## Command-line Usage
 
@@ -76,11 +74,11 @@ dynamodbexport.tableExport(region, table, function(err, data) {
 ### Command-line parameters
 
 * -t or --table - the table to export (required)
-* -r or --region - the AWS region to communicate with
+* -r or --region - the AWS region to communicate with (for remote DynamoDB exports only)
 
 ### Environment variables
 
 * AWS_ACCESS_KEY_ID - the AWS key
 * AWS_SECRET_ACCESS_KEY - the AWS secret
 
-N.B The *role* attache to the credentials you supply must have `DynamoDB.Scan` priveleges.
+N.B The *role* attached to the credentials you supply must have `DynamoDB.Scan` privileges.
