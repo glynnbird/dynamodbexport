@@ -22,9 +22,9 @@ export AWS_ACCESS_KEY_ID="OGIIWJGNWNIITJHWTHSO"
 export AWS_SECRET_ACCESS_KEY="YRPHIIIWJJJYwKLGV28JJuiuwnjiiqq06ASn"
 ```
 
-or in a [shared credentials file](http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html].
+or in a [shared credentials file](http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html).
 
-The AWS *Region* is set with the `-r` or `--region` command-line parameter
+The AWS *Region* is set with the `-r` or `--region` command-line parameter.
 
 ## Usage
 
@@ -48,7 +48,7 @@ Export complete { iterations: 1, records: 3, time: 0.145 }
 or piped elsewhere e.g. to [couchimport](https://www.npmjs.com/couchimport) to import the data into Apache CouchDB:
 
 ```sh
-$ dynamodbexport --table mytable | couchimport --db mycouchtable 
+$ dynamodbexport --table mytable | couchimport --db mycouchtable --type jsonl
 Export complete { iterations: 1, records: 3, time: 0.145 }
 couchimport writecomplete { total: 3, totalfailed: 0 } +20ms
 couchimport Import complete
