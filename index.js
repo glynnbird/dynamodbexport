@@ -4,7 +4,8 @@ var AWS = require('aws-sdk');
 var convertAmazonJSON = require('./lib/convert.js');
 
 // export a table to JSON
-var tableExport = function(region, table, callback) {
+var tableExport = function(region, table, callback, pauseTime) {
+  pauseTime = pauseTime || 0
 
   // if we don't have environment variables
   var config = {};
@@ -63,8 +64,7 @@ var tableExport = function(region, table, callback) {
           records++;
           console.log(JSON.stringify(obj));
         }
-
-        cb(null, null)
+        setTimeout(function(){ cb(null, null) }, pauseTime)
       });
     }, function() {
       // check to see if we've more work to do
